@@ -1,1 +1,2 @@
-export EDITOR='subl'
+export TERM="xterm-color"
+export EDITOR='mate -w'
