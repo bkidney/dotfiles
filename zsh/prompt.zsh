@@ -1,3 +1,7 @@
+# A mix of prompts from Zach Holman and
+# http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+# Customized to my liking
+
 autoload colors && colors
 setopt PROMPT_SUBST
 
