@@ -5,8 +5,8 @@
 [hub]
         protocol = https
 [user]
-        name = Zach Holman
-        email = zach@zachholman.com
+        name = Brian Kidney
+        email = bkidney@ieee.org
 [credential]
         helper = osxkeychain
 [alias]
