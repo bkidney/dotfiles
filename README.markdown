@@ -5,7 +5,7 @@
 Your dotfiles are how you personalize your system. These are mine. 
 
 This is a modifed version of Zach Holman's dot files.  I don't use
-zsh or many of the same programs as him, but I liked the way he 
+many of the same programs as him, but I liked the way he 
 handles the files. If you're interested in the philosophy behind 
 his project, you might want to [read his post on the
 subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
@@ -23,7 +23,7 @@ The install rake task will symlink the appropriate files in `.dotfiles` to your
 home directory. Everything is configured and tweaked within `~/.dotfiles`,
 though.
 
-The main file you'll want to change right off the bat is `bash/bashrc.symlink`,
+The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
 which sets up a few paths that'll be different on your particular machine.
 
 You'll also want to change `git/gitconfig.symlink`, which will set you up
@@ -49,7 +49,7 @@ There's a few special files in the hierarchy.
 
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
   available everywhere.
-- **topic/\*.bash**: Any files ending in `.bash` get loaded into your
+- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
   environment.
 - **topic/\*.symlink**: Any files ending in `*.symlink` get symlinked into
   your `$HOME`. This is so you can keep all of those versioned in your dotfiles
