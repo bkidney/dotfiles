@@ -18,6 +18,11 @@ fi
 autoload -U compinit
 compinit
 
+# History settings
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.history
+
 # load every completion after autocomplete loads
 #for config_file ($ZSH/**/completion.sh) source $config_file
 
