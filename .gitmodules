@@ -10,3 +10,6 @@
 [submodule "vim/vim.symlink/bundle/base16-vim"]
 	path = vim/vim.symlink/bundle/base16-vim
 	url = git@github.com:chriskempson/base16-vim.git
+[submodule "vim/vim.symlink/bundle/ctrlp.vim"]
+	path = vim/vim.symlink/bundle/ctrlp.vim
+	url = git@github.com:kien/ctrlp.vim.git
