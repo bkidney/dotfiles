@@ -16,6 +16,7 @@
         rank-contributers = !$ZSH/bin/git-rank-contributers
         count   = !git shortlog -sn
         pom = push origin master
+        ci = commit
 [color]
         diff = auto
         status = auto
