@@ -19,3 +19,6 @@
 [submodule "vim/vim.symlink/bundle/vim-airline"]
 	path = vim/vim.symlink/bundle/vim-airline
 	url = https://github.com/bling/vim-airline
+[submodule "vim/vim.symlink/bundle/neocomplete.vim"]
+	path = vim/vim.symlink/bundle/neocomplete.vim
+	url = git@github.com:Shougo/neocomplete.vim.git
