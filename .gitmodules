@@ -25,3 +25,9 @@
 [submodule "vim/vim.symlink/bundle/OmniCppComplete"]
 	path = vim/vim.symlink/bundle/OmniCppComplete
 	url = git@github.com:vim-scripts/OmniCppComplete.git
+[submodule "vim/vim.symlink/bundle/ultisnips"]
+	path = vim/vim.symlink/bundle/ultisnips
+	url = git@github.com:SirVer/ultisnips.git
+[submodule "vim/vim.symlink/bundle/vim-snippets"]
+	path = vim/vim.symlink/bundle/vim-snippets
+	url = git@github.com:honza/vim-snippets.git
