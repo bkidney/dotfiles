@@ -31,3 +31,6 @@
 [submodule "vim/vim.symlink/bundle/vim-snippets"]
 	path = vim/vim.symlink/bundle/vim-snippets
 	url = git@github.com:honza/vim-snippets.git
+[submodule "vim/vim.symlink/bundle/vim-commentary"]
+	path = vim/vim.symlink/bundle/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
