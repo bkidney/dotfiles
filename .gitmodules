@@ -22,3 +22,6 @@
 [submodule "vim/vim.symlink/bundle/neocomplete.vim"]
 	path = vim/vim.symlink/bundle/neocomplete.vim
 	url = git@github.com:Shougo/neocomplete.vim.git
+[submodule "vim/vim.symlink/bundle/OmniCppComplete"]
+	path = vim/vim.symlink/bundle/OmniCppComplete
+	url = git@github.com:vim-scripts/OmniCppComplete.git
