@@ -6,7 +6,7 @@
         protocol = https
 [user]
         name = Brian Kidney
-        email = bkidney@ieee.org
+        email = bkidney@briankidney.ca
 [credential]
         helper = osxkeychain
 [alias]
