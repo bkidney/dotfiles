@@ -17,6 +17,7 @@
         count   = !git shortlog -sn
         pom = push origin master
         ci = commit
+        ctags = !.git/hooks/ctags
 [color]
         diff = auto
         status = auto
