@@ -5,8 +5,6 @@ execute pathogen#infect()
 set noswapfile
 set mouse=a
 set ttimeoutlen=100       " decrease timeout for faster insert with 'o'
-set clipboard=unnamed     " use system clipboard
-
 
 " ----------------------------------------------------------------------------
 "  Text Formatting
