@@ -1,9 +1,10 @@
 if ($^O eq 'darwin') {
       # Open Skim when using OS X
-      $pdf_previewer = "open";
+      $pdf_previewer = "open -a /Applications/Skim.app";
+      $clean_ext = "paux lox pdfsync out";
 } else {
       # Open Mint's default pdf viewers
-          $pdf_previewer = "mate-open";
+      $pdf_previewer = "mate-open";
 }
 
 $pdf_mode = 1;

@@ -1,0 +1,2 @@
+alias latexmk='latexmk -pdf -pvc'
+
