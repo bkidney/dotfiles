@@ -15,7 +15,6 @@ set clipboard=unnamed     " use system clipboard
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
 inoremap # X<BS>#
-set nowrap                 " do not wrap lines
 set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
 set tabstop=4
@@ -25,6 +24,7 @@ set formatoptions+=n       " support for numbered/bullet lists
 "set textwidth=80           " wrap at 80 chars by default
 set virtualedit=block      " allow virtual edit in visual block ..
 syn on
+set nowrap                 " do not wrap lines by default
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -52,6 +52,9 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+
+" Toggle wrap lines and do so on whitespace
+map <leader>w :set tw=0 wrap linebreak<cr>    
 
 " clear the command line and search highlighting
 noremap <C-l> :nohlsearch<CR>
