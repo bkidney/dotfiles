@@ -147,6 +147,7 @@ if exists('+colorcolumn')
   set colorcolumn=80
 endif
 
+filetype plugin on
 
 " ---------------------------------------------------------------------------
 "  Functions, helpers and plugin config 
