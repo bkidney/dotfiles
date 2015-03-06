@@ -32,3 +32,9 @@ HISTFILE=~/.history
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/dev/arm-cs-tools
 PATH=$PATH:/usr/texbin
+
+# OPAM configuration
+if [[ -a ~/.opam ]]
+then
+  . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
