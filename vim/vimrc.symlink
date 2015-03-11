@@ -245,3 +245,9 @@ endif
 let g:UltiSnipsExpandTrigger="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+" ---------------------------------------------------------------------------
+" Latex Configuration
+" ---------------------------------------------------------------------------
+let g:tex_flavor = "latex"
