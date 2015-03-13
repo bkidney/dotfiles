@@ -36,6 +36,8 @@ let mapleader = ","
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
+" Use only ! to run command 
+nnoremap ! :! 
 
 " reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
@@ -251,3 +253,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Latex Configuration
 " ---------------------------------------------------------------------------
 let g:tex_flavor = "latex"
+
+" ---------------------------------------------------------------------------
+" Autosave
+" ---------------------------------------------------------------------------
+autocmd InsertLeave,TextChanged * if expand('%') != '' | update | endif
