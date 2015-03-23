@@ -56,7 +56,7 @@ inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 
 " Toggle wrap lines and do so on whitespace
-map <leader>w :set tw=0 wrap linebreak<cr>    
+map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>   
 
 " clear the command line and search highlighting
 noremap <C-l> :nohlsearch<CR>
