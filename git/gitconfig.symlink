@@ -24,7 +24,7 @@
         branch = auto
         ui = true
 [core]
-        excludesfile = ~/.gitignore
+	excludesfile = /Users/bkidney/.gitignore
         editor = vim
 [apply]
         whitespace = nowarn
