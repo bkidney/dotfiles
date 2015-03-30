@@ -1,5 +1,7 @@
 require 'rake'
 
+hostname = `hostname -s`.strip
+
 desc "Hook our dotfiles into system-standard positions."
 task :install do
   linkables = Dir.glob('*/**{.symlink}').reject do |file|
