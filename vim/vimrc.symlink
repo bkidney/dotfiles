@@ -1,59 +1,35 @@
+set nocompatible
+
+filetype off
+
+" Clear autocmd
+autocmd!
+
 " Load pathogen for plugin management
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
-
-set nocompatible
+Helptags
 
 set noswapfile
-set mouse=a
-set ttimeoutlen=100       " decrease timeout for faster insert with 'o'
+
+filetype on
+filetype plugin indent on
 
 " ----------------------------------------------------------------------------
-"  Text Formatting
+"  Theme 
 " ----------------------------------------------------------------------------
-
-set autoindent             " automatic indent new lines
-set smartindent            " be smart about it
-inoremap # X<BS>#
-set softtabstop=2          " yep, two
-set shiftwidth=2           " ..
-set tabstop=4
-set expandtab              " expand tabs to spaces
-set nosmarttab             " fuck tabs
-set formatoptions+=n       " support for numbered/bullet lists
-"set textwidth=80           " wrap at 80 chars by default
-set virtualedit=block      " allow virtual edit in visual block ..
-syn on
-set nowrap                 " do not wrap lines by default
+set t_Co=256
+colorscheme molokai 
 
 " ----------------------------------------------------------------------------
-"  Remapping
+"  My shortcuts 
 " ----------------------------------------------------------------------------
 
 " lead with ,
 let mapleader = ","
 
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
-
 " Use only ! to run command 
 nnoremap ! :! 
-
-" reflow paragraph with Q in normal and visual mode
-nnoremap Q gqap
-vnoremap Q gq
-
-" sane movement with wrap turned on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
 
 " Toggle wrap lines and do so on whitespace
 map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>   
@@ -65,47 +41,62 @@ noremap <C-l> :nohlsearch<CR>
 map <F5> :setlocal spell! spelllang=en_us<cr>
 imap <F5> <ESC>:setlocal spell! spelllang=en_us<cr>
 
+function! StripWhitespace ()
+    exec ':%s/ \+$//gc'
+endfunction
+map ,s :call StripWhitespace ()<CR>
+
 " ----------------------------------------------------------------------------
 "  UI
 " ----------------------------------------------------------------------------
 
 set ruler                  " show the cursor position all the time
-set noshowcmd              " don't display incomplete commands
-set nolazyredraw           " turn off lazy redraw
 set number                 " line numbers
-set wildmenu               " turn on wild menu
-set wildmode=list:longest,full
-set ch=2                   " command line height
-set backspace=2            " allow backspacing over everything in insert mode
-set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set shortmess=filtIoOA     " shorten messages
-set report=0               " tell us about changes
-set nostartofline          " don't jump to the start of line when scrolling
-set scrolloff=2            " minimum 2 lines above/below cursor
+set scrolloff=4            " minimum 2 lines above/below cursor
+set incsearch              " do incremental searching
+set showmatch              " brackets/braces that is
+set laststatus=2           " always show the status line
+set hlsearch               " highlight searches
+set cursorline             " highlight current line
+set visualbell
+set nowrap
 
-" put useful info in status bar
-" set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l,%c]\ [%L,%p%%]
+"hint to keep lines short
+if exists('+colorcolumn')
+  set colorcolumn=80
+endif
+
+" ----------------------------------------------------------------------------
+" Text Formatting
+" ----------------------------------------------------------------------------
+
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
 
 
-" set background=dark
-set t_Co=256
-colorscheme molokai 
+" ----------------------------------------------------------------------------
+"  FileType specific settings 
+" ----------------------------------------------------------------------------
 
-" set up some custom colors
-highlight clear SignColumn
-highlight VertSplit    ctermbg=236
-highlight ColorColumn  ctermbg=237
-highlight LineNr       ctermbg=236 ctermfg=240
-highlight CursorLineNr ctermbg=236 ctermfg=240
-highlight CursorLine   ctermbg=236
-highlight StatusLineNC ctermbg=238 ctermfg=0
-" highlight StatusLine   ctermbg=240 ctermfg=12
-highlight IncSearch    ctermbg=0   ctermfg=3
-highlight Search       ctermbg=0   ctermfg=9
-highlight Visual       ctermbg=3   ctermfg=0
-highlight Pmenu        ctermbg=240 ctermfg=12
-highlight PmenuSel     ctermbg=0   ctermfg=3
-highlight SpellBad     ctermbg=0   ctermfg=1
+" In makefiles do not expand tabs
+autocmd FileType make setlocal noexpandtab
+
+" Ruby uses 2-character indents
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+
+" Defaults for Go
+autocmd FileType go setlocal ts=8 sts=8 sw=8 noet
+
+" zsh functions are zsh, even without extensions
+autocmd BufRead,BufNewFile **/*zsh/functions/* set filetype=zsh
+
+" ----------------------------------------------------------------------------
+"  Airline Config
+" ----------------------------------------------------------------------------
 
 " Fonts for airline
 if has('macunix')
@@ -125,40 +116,26 @@ let g:airline#extensions#default#section_truncate_width = {
       \ 'z': 45,
       \ }
 
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set hlsearch               " highlight searches
-set visualbell             " shut the fuck up
-set cursorline             " highlight current line
-
 " highlight the status bar when in insert mode
-if version >= 700
-  au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
-  au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
-endif
+"if version >= 700
+"  au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
+"  au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
+"endif
 
-"hint to keep lines short
-if exists('+colorcolumn')
-  set colorcolumn=80
-endif
-
-filetype plugin on
 
 " ---------------------------------------------------------------------------
-"  Functions, helpers and plugin config 
+"  Silver Searcher
 " ---------------------------------------------------------------------------
 
-function! StripWhitespace ()
-    exec ':%s/ \+$//gc'
-endfunction
-map ,s :call StripWhitespace ()<CR>
+" map Silver Searcher
+map <leader>a :Ag!<space>
+
+" search for word under cursor with Silver Searcher
+map <leader>A :Ag! "<C-r>=expand('<cword>')<CR>"
+
+" ---------------------------------------------------------------------------
+"  CtrlP
+" ---------------------------------------------------------------------------
 
 " ctrlp config
 let g:ctrlp_map = '<leader>f'
@@ -169,19 +146,13 @@ let g:ctrlp_match_window_reversed = 0
 " use silver searcher for ctrlp
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-" map git commands
-map <leader>b :Gblame<cr>
-map <leader>l :!clear && git log -p %<cr>
-map <leader>d :!clear && git diff %<cr>
+" ---------------------------------------------------------------------------
+" Gist 
+" ---------------------------------------------------------------------------
 
 " open gist after it's been created
 let g:gist_open_browser_after_post = 1
 
-" map Silver Searcher
-map <leader>a :Ag!<space>
-
-" search for word under cursor with Silver Searcher
-map <leader>A :Ag! "<C-r>=expand('<cword>')<CR>"
 
 " ---------------------------------------------------------------------------
 " Neocomplete
@@ -247,7 +218,6 @@ endif
 let g:UltiSnipsExpandTrigger="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 
 " ---------------------------------------------------------------------------
 " Latex Configuration
