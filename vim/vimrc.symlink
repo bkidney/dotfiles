@@ -27,6 +27,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'tpope/vim-git'
+Plug 'vim-scripts/OmniCppComplete'
 call plug#end()
 
 filetype on
