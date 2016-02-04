@@ -1,38 +1,55 @@
 set nocompatible
-
 filetype off
 
 " Clear autocmd
 autocmd!
 
-" Load pathogen for plugin management
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-Helptags
-
 set noswapfile
+
+
+" ----------------------------------------------------------------------------
+"  Plugins
+" ----------------------------------------------------------------------------
+call plug#begin()
+Plug 'epmatsw/ag.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'kien/ctrlp.vim'
+Plug 'mattn/gist-vim'
+Plug 'Shougo/neocomplete'
+Plug 'majutsushi/tagbar'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'vim-airline/vim-airline'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+call plug#end()
 
 filetype on
 filetype plugin indent on
 
 " ----------------------------------------------------------------------------
-"  Theme 
+"  Theme
 " ----------------------------------------------------------------------------
 set t_Co=256
-colorscheme molokai 
+colorscheme molokai
 
 " ----------------------------------------------------------------------------
-"  My shortcuts 
+"  My shortcuts
 " ----------------------------------------------------------------------------
 
 " lead with ,
 let mapleader = ","
 
-" Use only ! to run command 
-nnoremap ! :! 
+" Use only ! to run command
+nnoremap ! :!
 
 " Toggle wrap lines and do so on whitespace
-map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>   
+map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>
 
 " clear the command line and search highlighting
 noremap <C-l> :nohlsearch<CR>
@@ -79,7 +96,7 @@ set expandtab
 
 
 " ----------------------------------------------------------------------------
-"  FileType specific settings 
+"  FileType specific settings
 " ----------------------------------------------------------------------------
 
 " In makefiles do not expand tabs
@@ -147,7 +164,7 @@ let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " ---------------------------------------------------------------------------
-" Gist 
+" Gist
 " ---------------------------------------------------------------------------
 
 " open gist after it's been created
