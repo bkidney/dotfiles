@@ -12,7 +12,6 @@ set noswapfile
 " ----------------------------------------------------------------------------
 call plug#begin()
 Plug 'epmatsw/ag.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mattn/gist-vim'
 Plug 'Shougo/neocomplete'
