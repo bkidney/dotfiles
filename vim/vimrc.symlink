@@ -114,6 +114,12 @@ autocmd FileType go setlocal ts=8 sts=8 sw=8 noet
 " zsh functions are zsh, even without extensions
 autocmd BufRead,BufNewFile **/*zsh/functions/* set filetype=zsh
 
+" Remove quick fix from the buffer next/prev
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
+
 " ----------------------------------------------------------------------------
 "  Airline Config
 " ----------------------------------------------------------------------------
