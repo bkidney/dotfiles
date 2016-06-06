@@ -12,7 +12,6 @@ set noswapfile
 " ----------------------------------------------------------------------------
 call plug#begin()
 Plug 'epmatsw/ag.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mattn/gist-vim'
 Plug 'Shougo/neocomplete'
@@ -27,6 +26,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'tpope/vim-git'
+Plug 'vim-scripts/OmniCppComplete'
 call plug#end()
 
 filetype on
@@ -240,11 +243,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Latex Configuration
 " ---------------------------------------------------------------------------
 let g:tex_flavor = "latex"
-
-" ---------------------------------------------------------------------------
-" Autosave
-" ---------------------------------------------------------------------------
-autocmd InsertLeave,TextChanged * if expand('%') != '' | update | endif
 
 " ---------------------------------------------------------------------------
 " Tagbar Config

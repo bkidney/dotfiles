@@ -44,6 +44,14 @@ unset config_files
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.history
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_ALLOW_CLOBBER
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY 
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
 
 # load every completion after autocomplete loads
 #for config_file ($ZSH/**/completion.sh) source $config_file
