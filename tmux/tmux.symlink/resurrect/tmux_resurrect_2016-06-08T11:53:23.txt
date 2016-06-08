@@ -1,0 +1,19 @@
+pane	5	1	:reattach-to-user-namespace	1	:*	1	:/Users/bkidney/.dotfiles/tmux	1	zsh	:
+pane	autocorrect	1	:zsh	1	:*	1	:/Users/bkidney/projects/PhD/papers/autocorrect-privacy	1	zsh	:
+pane	blog	1	:vim	1	:*	1	:/Users/bkidney/projects/web/briankidney.ca	1	vim	:vim content/post/welcome.md
+pane	blog	2	:hugo	0	:-	1	:/Users/bkidney/projects/web/briankidney.ca	1	zsh	:
+pane	blog	3	:sh	0	:	1	:/Users/bkidney/projects/web/briankidney.ca	1	zsh	:
+pane	hfrosa	1	:vim	1	:*	1	:/Users/bkidney/projects/hfrosa/toolkit	1	vim	:vim src/processing/doppler.cpp
+pane	hfrosa	2	:sh	0	:-	1	:/Users/bkidney/projects/hfrosa/toolkit	1	zsh	:
+pane	icf	1	:vim	1	:*	1	:/Users/bkidney/projects/web/ieeecf	1	vim	:vim
+pane	icf	2	:sh	0	:-	1	:/Users/bkidney/projects/web/ieeecf	1	zsh	:
+window	5	1	1	:*	625f,80x57,0,0,10
+window	autocorrect	1	1	:*	c466,80x57,0,0,9
+window	blog	1	1	:*	c45f,80x57,0,0,2
+window	blog	2	0	:-	c462,80x57,0,0,5
+window	blog	3	0	:	c463,80x57,0,0,6
+window	hfrosa	1	1	:*	c460,80x57,0,0,3
+window	hfrosa	2	0	:-	b261,80x24,0,0,4
+window	icf	1	1	:*	c464,80x57,0,0,7
+window	icf	2	0	:-	c465,80x57,0,0,8
+state	5	
