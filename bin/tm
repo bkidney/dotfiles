@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Respectfully stolen from Jonathan Anderson
+# https://github.com/trombonehero/config/blob/master/bin/tm
+
+# Rename the terminal window's title.
+title=$1
+if [ "${title}" = "" ]
+then
+	echo "Usage: $0 <title> [tmux args]"
+	exit 1
+fi
+echo -ne "\033]0;"${title}"\007"
+
+# Either attach to an existing tmux session with a given name
+# (and, optionally, additional command-line arguments) or else
+# create a new one with the same command-line arguments.
+tmux attach-session -t $* || tmux new-session -s $*
