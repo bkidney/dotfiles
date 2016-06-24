@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Greatly inspired by https://abesto.net/journaling-for-geeks/
+
+diary_editor=${EDITOR:-"/usr/bin/vim"}
+file=${DIARY_FILE:-"$HOME/Dropbox/journal.gpg"}
+
+if [ "$DIARY_SYMMETRIC" == "yes" ]; then
+    encrypt='--symmetric'
+else
+    encrypt='--encrypt'
+fi
+
+templ=`basename $0`
+tmp=`mktemp -t ${templ}` || exit 1
+
+cp "$file" "$tmp" && gpg --output "$tmp" --decrypt --yes "$file" && "$diary_editor" "$tmp" && gpg --output "$file" $encrypt --yes "$tmp"
+rm "$tmp"
