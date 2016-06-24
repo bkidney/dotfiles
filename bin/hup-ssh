@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Respectfully stolen from Jonathan Anderson
+# https://github.com/trombonehero/config/blob/master/bin/hup-ssh
+
+pgrep -f 'ssh .*-[tL]' | xargs kill -HUP
