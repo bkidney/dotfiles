@@ -66,6 +66,17 @@ function! StripWhitespace ()
 endfunction
 map ,s :call StripWhitespace ()<CR>
 
+function! Today()
+    call append( line(".") - 1, strftime('%Y-%m-%d') )
+endfunction
+command Today call Today()
+
+
+function! Yesterday()
+    call append( line(".") - 1, strftime('%Y-%m-%d', localtime()-86400) )
+endfunction
+command Yesterday call Yesterday()
+
 " ----------------------------------------------------------------------------
 "  UI
 " ----------------------------------------------------------------------------
