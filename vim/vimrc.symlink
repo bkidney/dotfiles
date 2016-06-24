@@ -120,6 +120,13 @@ augroup qf
     autocmd FileType qf set nobuflisted
 augroup END
 
+" Turn on spell check for 'text' files
+autocmd FileType tex,md,txt set spell
+
+" Latex need a fix to ensure spell check works
+autocmd FileType tex syntax spell toplevel
+
+
 " ----------------------------------------------------------------------------
 "  Airline Config
 " ----------------------------------------------------------------------------
