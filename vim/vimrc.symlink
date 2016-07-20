@@ -30,6 +30,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-git'
 Plug 'vim-scripts/OmniCppComplete'
+Plug 'mrtazz/vim-stencil'
 call plug#end()
 
 filetype on
@@ -136,6 +137,12 @@ autocmd FileType tex,md,txt set spell
 
 " Latex need a fix to ensure spell check works
 autocmd FileType tex syntax spell toplevel
+
+" ----------------------------------------------------------------------------
+"  FileType specific settings
+" ----------------------------------------------------------------------------
+
+let g:StencilTemplatepath = "~/.vim/templates/"
 
 
 " ----------------------------------------------------------------------------
