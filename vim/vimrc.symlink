@@ -40,6 +40,7 @@ filetype plugin indent on
 " ----------------------------------------------------------------------------
 set t_Co=256
 colorscheme molokai
+set t_ut= " Turns of background color erase. Fixes color issues in tmux
 
 " ----------------------------------------------------------------------------
 "  My shortcuts
