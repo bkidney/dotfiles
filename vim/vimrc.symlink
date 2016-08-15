@@ -30,6 +30,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-git'
 Plug 'vim-scripts/OmniCppComplete'
+Plug 'mrtazz/vim-stencil'
 call plug#end()
 
 filetype on
@@ -66,6 +67,17 @@ function! StripWhitespace ()
     exec ':%s/ \+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
+
+function! Today()
+    call append( line(".") - 1, strftime('%Y-%m-%d') )
+endfunction
+command Today call Today()
+
+
+function! Yesterday()
+    call append( line(".") - 1, strftime('%Y-%m-%d', localtime()-86400) )
+endfunction
+command Yesterday call Yesterday()
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -120,6 +132,19 @@ augroup qf
     autocmd!
     autocmd FileType qf set nobuflisted
 augroup END
+
+" Turn on spell check for 'text' files
+autocmd FileType tex,md,txt set spell
+
+" Latex need a fix to ensure spell check works
+autocmd FileType tex syntax spell toplevel
+
+" ----------------------------------------------------------------------------
+"  FileType specific settings
+" ----------------------------------------------------------------------------
+
+let g:StencilTemplatepath = "~/.vim/templates/"
+
 
 " ----------------------------------------------------------------------------
 "  Airline Config
@@ -237,9 +262,9 @@ endif
 " Ultisnips Configurations
 " ---------------------------------------------------------------------------
 
-let g:UltiSnipsExpandTrigger="<S-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<C-CR>"
+let g:UltiSnipsJumpForwardTrigger="<C-tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " ---------------------------------------------------------------------------
 " Latex Configuration

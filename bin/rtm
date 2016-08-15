@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# This script allows you to create a persistent connection to a tmux
+#  session on a remote machine. It uses autossh to revive connections
+#  after they die. If the specified tmux seesion exists, it will 
+#  connect to it, otherwise it will create it.
+#
+# To end your ssh session, slimply detach from the tmux session
+
+
+if [ "$#" -ne 2 ]; then
+  SCRIPT=`basename $0` 
+  echo "Usage: $SCRIPT REMOTE SESSION_NAME" >&2
+  exit 1
+fi
+
+# Extract Remote and Session from arguments
+REMOTE="$1"
+SESSION="$2"
+TMUX="tmux -2"
+
+# Construct the TMUX command, attach is session exists, create if not
+CMD="$TMUX attach -t $SESSION || $TMUX new-session -s $SESSION"
+
+# Set SSH to use interactive mode for the command
+SSH_OPTIONS="-t"
+
+autossh -t -M 0 $REMOTE $SSH_OPTIONS "$CMD"
