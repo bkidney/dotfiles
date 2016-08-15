@@ -58,13 +58,13 @@ set -g @continuum-restore 'on'
 
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
-set -g 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tpm'
 # tmux-plugins/tmux-sensible
 # tmux-plugins/tmux-yank
 # tmux-plugins/tmux-copycat
 # tmux-plugins/tmux-urlview
-set -g 'tmux-plugins/tmux-resurrect'
-set -g 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
 # tmux-plugins/tmux-fpp
 
 # Other examples:
