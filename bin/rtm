@@ -17,7 +17,7 @@ fi
 # Extract Remote and Session from arguments
 REMOTE="$1"
 SESSION="$2"
-TMUX="tmux"
+TMUX="tmux -2"
 
 # Construct the TMUX command, attach is session exists, create if not
 CMD="$TMUX attach -t $SESSION || $TMUX new-session -s $SESSION"
