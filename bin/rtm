@@ -10,7 +10,7 @@
 
 if [ "$#" -ne 2 ]; then
   SCRIPT=`basename $0` 
-  echo "Usage: $SCRIPT REMOTE SESSION_NAME" >&2
+  echo "Usage: $SCRIPT server session-name" >&2
   exit 1
 fi
 
