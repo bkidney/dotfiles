@@ -3,38 +3,38 @@
 # You probably want to change the [user] section here since you are not me.
 
 [hub]
-        protocol = https
+    protocol = https
 [user]
-        name = Brian Kidney
-        email = bkidney@briankidney.ca
+    name = Brian Kidney
+    email = bkidney@briankidney.ca
 [credential]
-        helper = osxkeychain
+    helper = osxkeychain
 [alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributers = !$ZSH/bin/git-rank-contributers
-        count   = !git shortlog -sn
-        pom = push origin master
-        ci = commit
-        ctags = !.git/hooks/ctags
+    co = checkout
+    promote = !$ZSH/bin/git-promote
+    wtf     = !$ZSH/bin/git-wtf
+    rank-contributers = !$ZSH/bin/git-rank-contributers
+    count   = !git shortlog -sn
+    pom = push origin master
+    ci = commit
+    ctags = !.git/hooks/ctags
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [core]
-	excludesfile = ~/.gitignore
-        editor = vim
+    excludesfile = ~/.gitignore
+    editor = vim
 [apply]
-        whitespace = nowarn
+    whitespace = nowarn
 [mergetool]
-        keepBackup = false
+    keepBackup = false
 [difftool]
-        prompt = false
+    prompt = false
 [help]
-        autocorrect = 1
+    autocorrect = 1
 [init]
-	templatedir = ~/.git_template
+    templatedir = ~/.git_template
 [push]
-	default = simple
+    default = simple
