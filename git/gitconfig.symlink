@@ -18,6 +18,7 @@
     pom = push origin master
     ci = commit
     ctags = !.git/hooks/ctags
+    wdiff = diff --word-diff
 [color]
     diff = auto
     status = auto
