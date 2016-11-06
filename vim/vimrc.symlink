@@ -5,7 +5,7 @@ filetype off
 autocmd!
 
 set noswapfile
-
+set hidden
 
 " ----------------------------------------------------------------------------
 "  Plugins
