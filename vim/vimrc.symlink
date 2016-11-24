@@ -57,7 +57,7 @@ nnoremap ! :!
 map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>
 
 " clear the command line and search highlighting
-noremap <C-l> :nohlsearch<CR>
+map <leader>l :nohlsearch<CR>
 
 " toggle spell check with <F5>
 map <F5> :setlocal spell! spelllang=en_us<cr>
@@ -204,9 +204,11 @@ let g:gist_open_browser_after_post = 1
 " Ultisnips Configurations
 " ---------------------------------------------------------------------------
 
-let g:UltiSnipsExpandTrigger="<C-CR>"
-let g:UltiSnipsJumpForwardTrigger="<C-tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetsDir='~/.vim/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+let g:UltiSnipsListSnippets='<c-l>'
 
 " ---------------------------------------------------------------------------
 " Latex Configuration
