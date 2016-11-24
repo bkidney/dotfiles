@@ -15,17 +15,23 @@ fi
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
 
+
+
 # load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
+if [[ -z $TMUX ]]; then
+    for file in ${(M)config_files:#*/path.zsh}
+    do
+        source $file
+    done
+fi
+
 
 # load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
 do
   source $file
 done
+
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
@@ -52,10 +58,3 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY 
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
-
-# load every completion after autocomplete loads
-#for config_file ($ZSH/**/completion.sh) source $config_file
-
-PATH=$PATH:$HOME/dev/arm-cs-tools
-PATH=$PATH:/usr/texbin
-

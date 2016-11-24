@@ -7,8 +7,6 @@
 [user]
     name = Brian Kidney
     email = bkidney@briankidney.ca
-[credential]
-    helper = osxkeychain
 [alias]
     co = checkout
     promote = !$ZSH/bin/git-promote

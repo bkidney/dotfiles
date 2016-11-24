@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.sfs:$ZSH/bin:$PATH"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin:$HOME/.sfs:$ZSH/bin"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/Dropbox/bin:$PATH"
 
