@@ -28,9 +28,11 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-markdown', { 'for': 'md' }
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
+Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 call plug#end()
 
 filetype on
