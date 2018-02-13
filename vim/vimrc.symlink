@@ -34,6 +34,7 @@ Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 Plug 'lifepillar/vim-solarized8'
+Plug 'reedes/vim-pencil', { 'for': ['md' ,'tex', 'txt', 'text'] }
 call plug#end()
 
 filetype on
@@ -124,7 +125,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
-set expandtab
+set noexpandtab
 
 
 " ----------------------------------------------------------------------------
@@ -150,7 +151,7 @@ augroup qf
 augroup END
 
 " Turn on spell check for 'text' files
-autocmd FileType tex,md,txt set spell
+autocmd FileType tex,md,txt,text set spell
 
 " Latex need a fix to ensure spell check works
 autocmd FileType tex syntax spell toplevel
@@ -263,3 +264,16 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" ---------------------------------------------------------------------------
+"  VimPencil Config
+"  --------------------------------------------------------------------------
+
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd,md	call pencil#init()
+  autocmd FileType text				call pencil#init()
+  autocmd FileType tex				call pencil#init()
+augroup END
