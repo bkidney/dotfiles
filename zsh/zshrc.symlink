@@ -86,6 +86,8 @@ ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold' #base0
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold' #base0
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=red,bold' #orange
 
+SPACESHIP_GIT_STATUS_SHOW=false
+
 if [[ $IS_FREEBSD ]]; then
 	unalias ls
 fi
