@@ -1,2 +1,5 @@
 alias reload!='. ~/.zshrc'
-alias grammarly="open -a Grammarly"
+
+if [[ $IS_MAC ]]; then
+	alias grammarly="open -a Grammarly"
+fi
