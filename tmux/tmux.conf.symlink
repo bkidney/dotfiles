@@ -59,7 +59,7 @@ set -g @continuum-restore 'on'
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin tmux-plugins/tmux-sensible
+set -g @plugin 'tmux-plugins/tmux-sensible'
 # @plugin tmux-plugins/tmux-yank
 # @plugin tmux-plugins/tmux-copycat
 # @plugin tmux-plugins/tmux-urlview
