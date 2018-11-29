@@ -34,7 +34,7 @@ Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 Plug 'lifepillar/vim-solarized8'
-Plug 'reedes/vim-pencil', { 'for': ['md' ,'tex', 'txt', 'text'] }
+Plug 'reedes/vim-pencil', { 'for': ['markdown', 'mkd', 'md' ,'tex', 'txt', 'text'] }
 call plug#end()
 
 filetype on
