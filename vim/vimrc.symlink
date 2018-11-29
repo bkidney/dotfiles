@@ -44,7 +44,8 @@ filetype plugin indent on
 "  Theme
 " ----------------------------------------------------------------------------
 set t_Co=256
-colorscheme solarized8_dark
+set background=dark
+colorscheme solarized8
 set t_ut= " Turns of background color erase. Fixes color issues in tmux
 
 " ----------------------------------------------------------------------------
