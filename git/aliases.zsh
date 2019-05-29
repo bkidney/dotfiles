@@ -5,4 +5,7 @@ grm() {
   git status | grep deleted | sed -e "s/[[:blank:]]*deleted:[[:blank:]]*//g" -e "s/\(^.*$\)/\"\1\" /g" |xargs git rm
 }
 
-alias git=hub
+
+if [[ ! -v IS_ALLENDALE ]]; then
+	alias git=hub
+fi
