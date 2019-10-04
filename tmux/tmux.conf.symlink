@@ -1,6 +1,9 @@
 # Remap prefix to ctrl-a (link screen)
 set -g prefix C-a
 
+set -g set-titles on
+set -g set-titles-string "#S - #H"
+
 # Set window and pane number to base number of 1
 set -g base-index 1
 setw -g pane-base-index 1
@@ -59,7 +62,7 @@ set -g @continuum-restore 'on'
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin tmux-plugins/tmux-sensible
+set -g @plugin 'tmux-plugins/tmux-sensible'
 # @plugin tmux-plugins/tmux-yank
 # @plugin tmux-plugins/tmux-copycat
 # @plugin tmux-plugins/tmux-urlview

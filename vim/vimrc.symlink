@@ -12,12 +12,12 @@ set hidden
 " ----------------------------------------------------------------------------
 call plug#begin()
 Plug 'epmatsw/ag.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'ajh17/VimCompletesMe'
 Plug 'majutsushi/tagbar'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-commentary'
@@ -34,8 +34,11 @@ Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 Plug 'lifepillar/vim-solarized8'
-Plug 'reedes/vim-pencil', { 'for': ['md' ,'tex', 'txt', 'text'] }
+Plug 'reedes/vim-pencil'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'davidoc/taskpaper.vim', { 'for': 'taskpaper' }
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
 
 filetype on
@@ -153,7 +156,7 @@ augroup qf
 augroup END
 
 " Turn on spell check for 'text' files
-autocmd FileType tex,md,txt,text set spell
+autocmd FileType tex,md,txt,text,adoc set spell
 
 " Latex need a fix to ensure spell check works
 autocmd FileType tex syntax spell toplevel
@@ -204,6 +207,7 @@ map <leader>A :Ag! "<C-r>=expand('<cword>')<CR>"
 " ---------------------------------------------------------------------------
 
 " ctrlp config
+nmap <Leader>t :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
@@ -276,6 +280,21 @@ let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd,md	call pencil#init()
+  autocmd FileType adoc				call pencil#init()
   autocmd FileType text				call pencil#init()
   autocmd FileType tex				call pencil#init()
 augroup END
+
+" ---------------------------------------------------------------------------
+"  Taskpaper.vim Config
+"  --------------------------------------------------------------------------
+
+let g:task_paper_date_format = "%Y-%m-%d"
+let g:task_paper_follow_move = 0
+let g:task_paper_search_hide_done = 1
+
+" ---------------------------------------------------------------------------
+"  Goyo.vim Config
+"  --------------------------------------------------------------------------
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
