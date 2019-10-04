@@ -7,6 +7,7 @@
 [user]
     name = Brian Kidney
     email = bkidney@briankidney.ca
+	signingkey = FDEEB338F248A893
 [alias]
     co = checkout
     promote = !$ZSH/bin/git-promote
@@ -37,3 +38,5 @@
     templatedir = ~/.git_template
 [push]
     default = simple
+[branch]
+	autosetuprebase = always
