@@ -67,6 +67,7 @@ antigen bundles <<END
 	jreese/zsh-titles
 	colored-man-pages
 	zsh-users/zsh-syntax-highlighting
+	joel-porquet/zsh-dircolors-solarized
 END
 
 # antigen theme sobolevn/sobole-zsh-theme
