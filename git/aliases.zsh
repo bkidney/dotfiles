@@ -6,6 +6,6 @@ grm() {
 }
 
 
-if [[ ! -v IS_ALLENDALE ]]; then
+if [[ -v $IS_ALLENDALE ]]; then
 	alias git=hub
 fi
