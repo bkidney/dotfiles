@@ -15,8 +15,9 @@ Plug 'epmatsw/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'ajh17/VimCompletesMe'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
+
+
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
@@ -28,7 +29,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-markdown', { 'for': 'md' }
+" Plug 'tpope/vim-markdown', { 'for': 'md' }
+Plug 'plasticboy/vim-markdown'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
@@ -39,6 +41,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'davidoc/taskpaper.vim', { 'for': 'taskpaper' }
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'chemzqm/macdown.vim'
 call plug#end()
 
 filetype on
@@ -61,6 +65,8 @@ let mapleader = ","
 
 " Use only ! to run command
 nnoremap ! :!
+
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Toggle wrap lines and do so on whitespace
 map <leader>w :set <C-R>=eval('&wrap') ? 'nowrap' : 'tw=0 wrap linebreak'<CR><CR>
