@@ -5,4 +5,8 @@ fi
 export PATH="$ZSH/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+if [[ $IS_MAC ]]; then
+	export PATH="$(brew --prefix openssh)/bin:$PATH"
+fi
+
 export MANPATH="/usr/local/man:/usr/local/git/man:$MANPATH"
