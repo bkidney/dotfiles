@@ -4,7 +4,7 @@ if ($^O eq 'darwin') {
       $clean_ext = "paux lox pdfsync out";
 } else {
       # Open Mint's default pdf viewers
-      $pdf_previewer = "mate-open";
+      $pdf_previewer = "okular";
 }
 
 $pdf_mode = 1;
