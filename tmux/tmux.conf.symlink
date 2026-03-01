@@ -30,33 +30,42 @@ bind K resize-pane -U 5
 bind L resize-pane -R 5
 
 # Turn off mouse handling
-setw -g mouse off
+setw -g mouse on
+
+set -s set-clipboard on
 
 # Configure colours
-set -g status-style fg=white,bg=black
-setw -g window-status-style fg=cyan,bg=default,dim
-setw -g window-status-current-style fg=white,bg=red,bright
-set -g message-style fg=white,bg=black,bright
+# set -g status-style fg=white,bg=black
+# setw -g window-status-style fg=cyan,bg=default,dim
+# setw -g window-status-current-style fg=white,bg=red,bright
+# set -g message-style fg=white,bg=black,bright
 
 # Configure status bar
-set -g status-left-length 40
-set -g status-left "#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P"
-set -g status-right "#[fg=cyan]#h %d-%b %R"
-set -g status-justify centre
+# set -g status-left-length 40
+# set -g status-left "#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P"
+# set -g status-right "#[fg=cyan]#h %d-%b %R"
+# set -g status-justify centre
+
+
+# Configure the catppuccin plugin
+set -g default-terminal "tmux-256color"
+set -g @catppuccin_flavor "mocha"
+set -g @catppuccin_window_status_style "rounded"
 
 # Highlight window when it has new activity
 setw -g monitor-activity on
 set -g visual-activity on
 
 # tmux-continuum settings
-set -g @continuum-restore 'on'
+# set -g @continuum-restore 'on'
 
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
+set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-# @plugin tmux-plugins/tmux-yank
-# @plugin tmux-plugins/tmux-copycat
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-copycat'
 # @plugin tmux-plugins/tmux-urlview
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
