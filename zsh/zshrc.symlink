@@ -14,6 +14,7 @@ fi
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
+config_files=("${(@)config_files:#*/antigen.zsh}") # Remove legecy antigen
 
 # Determine the OS
 for file in ${(M)config_files:#*/os.zsh}
@@ -61,40 +62,64 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 
 export CLICOLOR=1
-[[ "$TERM" == "xterm" ]] && export TERM=xterm-256color
-
+# [[ "$TERM" == "xterm" ]] && export TERM=xterm-256color
+if [[ $IS_FREEBSD ]]; then
+	alias dircolors='gdircolors'
+fi
 # Load antigen bundles
 
+if [[ $IS_FREEBSD ]]; then
+	source /usr/local/share/zsh-antigen/antigen.zsh
+else
+	source $ZSH/zsh/antigen.zsh
+fi
 antigen use oh-my-zsh
 
+antigen bundle ssh-agent
 antigen bundles <<END
+	chrissicool/zsh-256color
 	zsh-users/zsh-autosuggestions
 	zsh-users/zsh-completions
 	jreese/zsh-titles
-	colored-man-pages
+	# zlsun/solarized-man
 	zsh-users/zsh-syntax-highlighting
-	joel-porquet/zsh-dircolors-solarized
+	# joel-porquet/zsh-dircolors-solarized
+	# catppuccin/zsh-syntax-highlighting
 END
 
 # antigen theme sobolevn/sobole-zsh-theme
-antigen theme denysdovhan/spaceship-prompt spaceship 
-
+# antigen theme denysdovhan/spaceship-prompt spaceship 
 antigen apply
 
-ZSH_HIGHLIGHT_STYLES[default]='fg=cyan,bold' #base1
-ZSH_HIGHLIGHT_STYLES[alias]='fg=white'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[function]='fg=white'
-ZSH_HIGHLIGHT_STYLES[command]='fg=white'
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=white'
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=green,bold' #base01
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold' #base0
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold' #base0
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=red,bold' #orange
+# ZSH_HIGHLIGHT_STYLES[default]='fg=cyan,bold' #base1
+# ZSH_HIGHLIGHT_STYLES[alias]='fg=white'
+# ZSH_HIGHLIGHT_STYLES[builtin]='fg=yellow'
+# ZSH_HIGHLIGHT_STYLES[function]='fg=white'
+# ZSH_HIGHLIGHT_STYLES[command]='fg=white'
+# ZSH_HIGHLIGHT_STYLES[precommand]='fg=white'
+# ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=green,bold' #base01
+# ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+# ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue,bold' #base0
+# ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue,bold' #base0
+# ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=red,bold' #orange
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
-SPACESHIP_GIT_STATUS_SHOW=false
+# SPACESHIP_GIT_STATUS_SHOW=false
 
 if [[ $IS_FREEBSD ]]; then
 	unalias ls
+	export PATH=$PATH:/home/bkidney/.local/bin
+	export XDG_RUNTIME_DIR=/var/run/user/`id -u`
 fi
+
+if [[ $IS_LAPTOP ]]; then
+	alias ethdown='sudo service netif stop ue0'
+	alias ethup='sudo service netif start ue0'
+	alias wifidown='sudo service netif stop wlan0'
+	alias wifiup='sudo service netif start wlan0'
+	alias s2e="wifidown && ethup"
+	alias s2w="ethdown && wifiup"
+fi
+
+# start Starship prompt
+eval "$(starship init zsh)"
