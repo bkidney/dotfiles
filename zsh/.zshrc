@@ -1,6 +1,3 @@
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME
-
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/projects
 
@@ -13,7 +10,7 @@ fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+config_files=($HOME/.zsh/*.zsh)
 config_files=("${(@)config_files:#*/antigen.zsh}") # Remove legecy antigen
 
 # Determine the OS
@@ -71,7 +68,7 @@ fi
 if [[ $IS_FREEBSD ]]; then
 	source /usr/local/share/zsh-antigen/antigen.zsh
 else
-	source $ZSH/zsh/antigen.zsh
+	source $HOME/.zsh/antigen.zsh
 fi
 antigen use oh-my-zsh
 
