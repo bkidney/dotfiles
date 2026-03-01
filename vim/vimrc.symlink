@@ -17,8 +17,6 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 " Plug 'majutsushi/tagbar'
 
-
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-commentary'
@@ -30,19 +28,22 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 " Plug 'tpope/vim-markdown', { 'for': 'md' }
-Plug 'plasticboy/vim-markdown'
+Plug 'preservim/vim-markdown'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-git'
 Plug 'mrtazz/vim-stencil'
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 Plug 'lifepillar/vim-solarized8'
-Plug 'reedes/vim-pencil'
+Plug 'preservim/vim-pencil'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'davidoc/taskpaper.vim', { 'for': 'taskpaper' }
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chemzqm/macdown.vim'
+Plug 'jkramer/vim-checkbox'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'honza/vim-snippets'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 call plug#end()
 
 filetype on
@@ -88,6 +89,13 @@ function! Today()
 endfunction
 command Today call Today()
 
+function! Newfile(dir, name)
+	let l:date = strftime('%Y-%m-%d')
+	let l:name = join(split(a:name), "-")
+	let l:fName = l:date . "_" . l:name . ".md"
+	call append( line(".") - 1, "[" . a:name . "](" . l:fName . ")")
+endfunction
+command! -nargs=1 Newfile call Newfile(<args>)
 
 function! Yesterday()
     call append( line(".") - 1, strftime('%Y-%m-%d', localtime()-86400) )
@@ -106,6 +114,17 @@ endf
 
 nmap <leader>- :<c-u>call Solarized8Contrast(-v:count1)<cr>
 nmap <leader>+ :<c-u>call Solarized8Contrast(+v:count1)<cr>
+
+" Navigate the complete menu items like CTRL+n / CTRL+p would.
+inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
+inoremap <expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
+
+" Select the complete menu item like CTRL+y would.
+inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
+inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
+
+" Cancel the complete menu item like CTRL+e would.
+inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -292,15 +311,58 @@ augroup pencil
 augroup END
 
 " ---------------------------------------------------------------------------
-"  Taskpaper.vim Config
+"  Markdown.vim Config
 "  --------------------------------------------------------------------------
 
-let g:task_paper_date_format = "%Y-%m-%d"
-let g:task_paper_follow_move = 0
-let g:task_paper_search_hide_done = 1
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_edit_url_in = 'tab'
+
+" ---------------------------------------------------------------------------
+"  Markdown.vim Config
+"  --------------------------------------------------------------------------
+
+nnoremap <Leader>ww :e ~/Nextcloud/docs/notebook/index.md<cr>
+
 
 " ---------------------------------------------------------------------------
 "  Goyo.vim Config
 "  --------------------------------------------------------------------------
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" ---------------------------------------------------------------------------
+"  COC.vim Config
+"  --------------------------------------------------------------------------
+
+"  " Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
