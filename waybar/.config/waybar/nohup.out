@@ -1,0 +1,74 @@
+
+(waybar:50571): Gtk-WARNING **: 21:37:45.875: Theme parsing error: gtk-dark.css:1048:16: 'border-spacing' is not a valid property name
+[2026-02-18 21:37:46.021] [info] Using configuration file /home/bkidney/.config/waybar/config.jsonc
+[2026-02-18 21:37:46.221] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2026-02-18 21:37:46.238] [info] Using CSS file /home/bkidney/.config/waybar/style.css
+[2026-02-18 21:37:46.254] [info] Hyprland IPC starting
+[2026-02-18 21:37:46.258] [info] Loading persistent workspaces from Hyprland workspace rules
+[2026-02-18 21:37:46.273] [error] media stopped unexpectedly, is it endless?
+[2026-02-18 21:37:46.307] [warning] module backlight: Disabling module "backlight", No backlight found
+[2026-02-18 21:37:46.852] [info] Bar configured (width: 2560, height: 40) for output: DP-1
+
+(waybar:96677): Gtk-WARNING **: 21:39:15.821: Theme parsing error: gtk-dark.css:1048:16: 'border-spacing' is not a valid property name
+[2026-02-18 21:39:15.943] [info] Using configuration file /home/bkidney/.config/waybar/config.jsonc
+[2026-02-18 21:39:16.142] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2026-02-18 21:39:16.162] [info] Using CSS file /home/bkidney/.config/waybar/style.css
+[2026-02-18 21:39:16.176] [info] Hyprland IPC starting
+[2026-02-18 21:39:16.179] [info] Loading persistent workspaces from Hyprland workspace rules
+[2026-02-18 21:39:16.222] [warning] module backlight: Disabling module "backlight", No backlight found
+[2026-02-18 21:39:16.477] [error] media stopped unexpectedly, is it endless?
+[2026-02-18 21:39:16.733] [info] Bar configured (width: 2560, height: 40) for output: DP-1
+
+(waybar:99055): Gtk-WARNING **: 21:44:24.113: Theme parsing error: gtk-dark.css:1048:16: 'border-spacing' is not a valid property name
+[2026-02-18 21:44:24.258] [info] Using configuration file /home/bkidney/.config/waybar/config.jsonc
+[2026-02-18 21:44:24.434] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2026-02-18 21:44:24.452] [info] Using CSS file /home/bkidney/.config/waybar/style.css
+[2026-02-18 21:44:24.467] [info] Hyprland IPC starting
+[2026-02-18 21:44:24.470] [info] Loading persistent workspaces from Hyprland workspace rules
+[2026-02-18 21:44:24.514] [warning] module backlight: Disabling module "backlight", No backlight found
+[2026-02-18 21:44:24.782] [error] media stopped unexpectedly, is it endless?
+[2026-02-18 21:44:25.083] [info] Bar configured (width: 2560, height: 40) for output: DP-1
+Gdk-Message: 11:00:52.728: Unable to load hand2 from the cursor theme
+Gdk-Message: 11:00:52.772: Unable to load arrow from the cursor theme
+Gdk-Message: 12:36:30.024: Unable to load hand2 from the cursor theme
+Gdk-Message: 12:36:30.041: Unable to load arrow from the cursor theme
+Gdk-Message: 12:36:30.149: Unable to load hand2 from the cursor theme
+Gdk-Message: 12:36:33.760: Unable to load arrow from the cursor theme
+Gdk-Message: 09:28:35.024: Unable to load hand2 from the cursor theme
+Gdk-Message: 09:28:35.382: Unable to load arrow from the cursor theme
+Gdk-Message: 14:06:47.806: Unable to load hand2 from the cursor theme
+Gdk-Message: 14:06:48.042: Unable to load arrow from the cursor theme
+Gdk-Message: 14:06:48.081: Unable to load hand2 from the cursor theme
+Gdk-Message: 14:06:48.097: Unable to load arrow from the cursor theme
+Gdk-Message: 16:55:53.129: Unable to load hand2 from the cursor theme
+Gdk-Message: 16:55:53.152: Unable to load arrow from the cursor theme
+Gdk-Message: 10:16:30.519: Unable to load hand2 from the cursor theme
+
+** (process:71518): WARNING **: 10:16:31.192: Can't make the global C++ locale equal to the C locale.
+   collate_byname<char>::collate_byname failed to construct for C/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8
+   C locale = C/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8
+
+
+** (process:71518): WARNING **: 10:16:31.192: Can't make the global C++ locale equal to the C locale.
+   collate_byname<char>::collate_byname failed to construct for C/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8
+   C locale = C/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/en_US.UTF-8
+
+MESA-INTEL: warning: ../src/intel/vulkan/anv_formats.c:763: FINISHME: support YUV colorspace with DRM format modifiers
+MESA-INTEL: warning: ../src/intel/vulkan/anv_formats.c:794: FINISHME: support more multi-planar formats with DRM modifiers
+Gdk-Message: 10:16:32.303: Unable to load arrow from the cursor theme
+Gdk-Message: 10:16:33.056: Unable to load hand2 from the cursor theme
+Gdk-Message: 10:16:33.116: Unable to load arrow from the cursor theme
+Gdk-Message: 18:08:51.072: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:08:53.401: Unable to load arrow from the cursor theme
+Gdk-Message: 18:21:48.469: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:21:48.509: Unable to load arrow from the cursor theme
+Gdk-Message: 18:27:05.021: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:27:05.029: Unable to load arrow from the cursor theme
+Gdk-Message: 18:27:05.029: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:27:05.063: Unable to load arrow from the cursor theme
+Gdk-Message: 18:27:05.264: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:27:05.294: Unable to load arrow from the cursor theme
+Gdk-Message: 18:27:05.365: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:27:05.610: Unable to load arrow from the cursor theme
+Gdk-Message: 18:27:15.230: Unable to load hand2 from the cursor theme
+Gdk-Message: 18:27:15.252: Unable to load arrow from the cursor theme

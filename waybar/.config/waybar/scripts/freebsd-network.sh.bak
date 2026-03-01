@@ -1,0 +1,73 @@
+#!/bin/sh
+
+interfaces=$(ifconfig -l)
+default_if=$(route -n get default 2>/dev/null | awk '/interface:/{print $2}')
+
+output=""
+tooltip=""
+
+for iface in $interfaces; do
+    [ "$iface" = "lo0" ] && continue
+
+    info=$(ifconfig "$iface" 2>/dev/null)
+    [ -z "$info" ] && continue
+
+    status=$(echo "$info" | awk -F': ' '/status:/{print $2}')
+
+    # Skip if explicitly no carrier
+    [ "$status" = "no carrier" ] && continue
+
+    # Detect WiFi by presence of SSID field
+    echo "$info" | grep -q "ssid "
+    if [ $? -eq 0 ]; then
+        # WiFi interface detected
+
+        ssid=$(echo "$info" | awk -F'ssid ' '/ssid /{print $2}' | awk '{print $1}')
+
+        # Get RSSI from list sta
+        sta_info=$(ifconfig "$iface" list sta 2>/dev/null | awk 'NR==2')
+
+        # Extract value after "(rssi "
+        rssi=$(echo "$sta_info" | awk -F'rssi ' '{print $2}' | awk -F':' '{print $1}')
+
+        # Remove decimal portion (34.0 → 34)
+        rssi_int=$(echo "$rssi" | awk -F'.' '{print $1}')
+
+        percent=0
+
+        # Ensure numeric before arithmetic
+        if echo "$rssi_int" | grep -Eq '^[0-9]+$'; then
+            # Most drivers max around 60–70
+            percent=$(( rssi_int * 100 / 60 ))
+            [ $percent -gt 100 ] && percent=100
+        fi
+
+
+        icon=""
+        output="$output $icon ${percent}%"
+        tooltip="${tooltip}${iface} (WiFi)\nSSID: ${ssid}\nSignal: ${percent}% (RSSI ${rssi} dBm)\n\n"
+
+    else
+        # Ethernet
+
+        if [ "$iface" = "$default_if" ]; then
+            icon="󰈀"
+            tooltip="${tooltip}${iface} (Ethernet - Default Route)\n\n"
+        else
+            icon="󰈂"
+            tooltip="${tooltip}${iface} (Ethernet)\n\n"
+        fi
+
+        output="$output $icon"
+    fi
+done
+
+output=$(echo "$output" | sed 's/^ *//')
+
+if [ -z "$output" ]; then
+    output="󰤮 Offline"
+    tooltip="No active network interfaces"
+fi
+
+printf '{"text":"%s","tooltip":"%s"}\n' "$output" "$tooltip"
+

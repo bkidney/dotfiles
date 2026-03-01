@@ -1,0 +1,119 @@
+#!/bin/sh
+
+STATE_FILE="/tmp/waybar_net_stats"
+NOW=$(date +%s)
+
+# Load previous stats safely
+[ -f "$STATE_FILE" ] && . "$STATE_FILE"
+echo "PREV_TIME=$NOW" > "$STATE_FILE"
+
+output=""
+tooltip=""
+
+for iface in $(ifconfig -l); do
+    [ "$iface" = "lo0" ] && continue
+    case "$iface" in
+        bridge*|vm_*|tailscale*|epair*|tap*|tun*) continue ;;
+    esac
+
+    info=$(ifconfig "$iface" 2>/dev/null)
+    [ -z "$info" ] && continue
+    status=$(echo "$info" | awk -F': ' '/status:/{print $2}')
+    [ "$status" = "no carrier" ] && continue
+
+    default_if=$(route -n get default 2>/dev/null | awk '/interface:/{print $2}')
+
+    # ----------------------------
+    # IP addresses
+    # ----------------------------
+    ipv4=$(echo "$info" | awk '/inet /{print $2}')
+    ipv6=$(echo "$info" | awk '/inet6 /{print $2}' | grep -v '^fe80')
+
+    ip_block=""
+    [ -n "$ipv4" ] && ip_block="${ip_block}IPv4: ${ipv4}\n"
+    [ -n "$ipv6" ] && ip_block="${ip_block}IPv6: ${ipv6}\n"
+
+    # ----------------------------
+    # Traffic stats using netstat -ibn ($8 = Ibytes, $11 = Obytes)
+    # ----------------------------
+    safe_iface=$(echo "$iface" | tr '.-' '__')
+
+    read rx_bytes tx_bytes <<EOF
+$(netstat -ibn | awk -v iface="$iface" '$1==iface {rx+=$8; tx+=$11} END {print rx, tx}')
+EOF
+
+    rx_bytes=$(echo "$rx_bytes" | tr -cd '0-9'); [ -z "$rx_bytes" ] && rx_bytes=0
+    tx_bytes=$(echo "$tx_bytes" | tr -cd '0-9'); [ -z "$tx_bytes" ] && tx_bytes=0
+
+    prev_rx_var="PREV_RX_$safe_iface"
+    prev_tx_var="PREV_TX_$safe_iface"
+
+    eval prev_rx=\$$prev_rx_var
+    eval prev_tx=\$$prev_tx_var
+    [ -z "$prev_rx" ] && prev_rx=0
+    [ -z "$prev_tx" ] && prev_tx=0
+
+    delta_time=$((NOW - ${PREV_TIME:-$NOW}))
+    [ "$delta_time" -le 0 ] && delta_time=1
+
+    rx_delta=$(( rx_bytes - prev_rx ))
+    tx_delta=$(( tx_bytes - prev_tx ))
+    [ "$rx_delta" -lt 0 ] && rx_delta=0
+    [ "$tx_delta" -lt 0 ] && tx_delta=0
+
+    rx_rate=$(( rx_delta / delta_time / 1024 ))
+    tx_rate=$(( tx_delta / delta_time / 1024 ))
+
+    echo "PREV_RX_$safe_iface=$rx_bytes" >> "$STATE_FILE"
+    echo "PREV_TX_$safe_iface=$tx_bytes" >> "$STATE_FILE"
+
+    traffic_block="↓ ${rx_rate}KB/s ↑ ${tx_rate}KB/s"
+
+    # ----------------------------
+    # WiFi detection
+    # ----------------------------
+    echo "$info" | grep -q "ssid "
+    if [ $? -eq 0 ]; then
+        ssid=$(echo "$info" | awk -F'ssid ' '/ssid /{print $2}' | awk '{print $1}')
+        sta_info=$(ifconfig "$iface" list sta 2>/dev/null | awk 'NR==2')
+
+        rssi=$(echo "$sta_info" | awk -F'rssi ' '{print $2}' | awk -F':' '{print $1}')
+        rssi_int=$(echo "$rssi" | awk -F'.' '{print $1}')
+
+        percent=0
+        if echo "$rssi_int" | grep -Eq '^[0-9]+$'; then
+            percent=$(( rssi_int * 100 / 60 ))
+            [ $percent -gt 100 ] && percent=100
+        fi
+
+        if [ "$percent" -ge 80 ]; then bars="▂▄▆█"
+        elif [ "$percent" -ge 60 ]; then bars="▂▄▆"
+        elif [ "$percent" -ge 40 ]; then bars="▂▄"
+        elif [ "$percent" -ge 20 ]; then bars="▂"
+        else bars="·"
+        fi
+
+        icon=""
+        output="$output $bars$icon"
+        tooltip="${tooltip}${iface} (WiFi)\nSSID: ${ssid}\nSignal: ${percent}%\n"
+        tooltip="${tooltip}${traffic_block}\n${ip_block}\n"
+
+    else
+        # Ethernet
+        if [ "$iface" = "$default_if" ]; then
+            icon="󰈀 "
+            tooltip="${tooltip}${iface} (Ethernet - Default Route)\n"
+        else
+            icon=""
+            tooltip="${tooltip}${iface} (Ethernet)\n"
+        fi
+        output="$output$icon"
+        tooltip="${tooltip}${traffic_block}\n${ip_block}\n"
+    fi
+done
+
+output=$(echo "$output" | sed 's/^ *//')
+[ -z "$output" ] && output="󰤮 Offline" && tooltip="No active physical interfaces"
+
+printf '{"text":"%s","tooltip":"%s"}\n' "$output" "$tooltip"
+

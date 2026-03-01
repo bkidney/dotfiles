@@ -1,0 +1,75 @@
+#!/bin/sh
+
+interfaces=$(ifconfig -l)
+default_if=$(route -n get default 2>/dev/null | awk '/interface:/{print $2}')
+
+output=""
+tooltip=""
+
+for iface in $interfaces; do
+    [ "$iface" = "lo0" ] && continue
+
+    info=$(ifconfig "$iface" 2>/dev/null)
+    [ -z "$info" ] && continue
+
+    status=$(echo "$info" | awk -F': ' '/status:/{print $2}')
+    [ "$status" = "no carrier" ] && continue
+
+    # Extract IP addresses
+    ipv4=$(echo "$info" | awk '/inet /{print $2}')
+    ipv6=$(echo "$info" | awk '/inet6 /{print $2}' | grep -v '^fe80')
+
+    ip_block=""
+    [ -n "$ipv4" ] && ip_block="${ip_block}IPv4: ${ipv4}\n"
+    [ -n "$ipv6" ] && ip_block="${ip_block}IPv6: ${ipv6}\n"
+
+    # Detect WiFi
+    echo "$info" | grep -q "ssid "
+    if [ $? -eq 0 ]; then
+
+        ssid=$(echo "$info" | awk -F'ssid ' '/ssid /{print $2}' | awk '{print $1}')
+
+        sta_info=$(ifconfig "$iface" list sta 2>/dev/null | awk 'NR==2')
+
+        # Extract RSSI value from "(rssi 34.0:27.0:...)"
+        rssi=$(echo "$sta_info" | awk -F'rssi ' '{print $2}' | awk -F':' '{print $1}')
+        rssi_int=$(echo "$rssi" | awk -F'.' '{print $1}')
+
+        percent=0
+        if echo "$rssi_int" | grep -Eq '^[0-9]+$'; then
+            percent=$(( rssi_int * 100 / 60 ))
+            [ $percent -gt 100 ] && percent=100
+        fi
+
+        icon=""
+        output="$output $icon ${percent}%"
+
+        tooltip="${tooltip}${iface} (WiFi)\n"
+        tooltip="${tooltip}SSID: ${ssid}\n"
+        tooltip="${tooltip}Signal: ${percent}%\n"
+        tooltip="${tooltip}${ip_block}\n"
+
+    else
+        # Ethernet
+
+        if [ "$iface" = "$default_if" ]; then
+            icon="󰈀"
+            tooltip="${tooltip}${iface} (Ethernet - Default Route)\n"
+            output="$output $icon"
+        else
+            tooltip="${tooltip}${iface} (Ethernet)\n"
+        fi
+
+        tooltip="${tooltip}${ip_block}\n"
+    fi
+done
+
+output=$(echo "$output" | sed 's/^ *//')
+
+if [ -z "$output" ]; then
+    output="󰤮 Offline"
+    tooltip="No active network interfaces"
+fi
+
+printf '{"text":"%s","tooltip":"%s"}\n' "$output" "$tooltip"
+

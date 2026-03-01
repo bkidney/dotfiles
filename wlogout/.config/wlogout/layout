@@ -1,0 +1,35 @@
+{
+    "label" : "lock",
+    "action" : "hyprlock",
+    "text" : "Lock"
+}
+
+{
+    "label" : "hibernate",
+    "action" : "zzz",
+    "text" : "Sleep"
+}
+
+{
+    "label" : "logout",
+    "action" : "hyprctl dispatch exit 0",
+    "text" : "Logout"
+}
+
+{
+    "label" : "shutdown",
+    "action" : "shutdown -h now",
+    "text" : "Shutdown"
+}
+
+{
+    "label" : "suspend",
+    "action" : "zzz",
+    "text" : "Suspend"
+}
+
+{
+    "label" : "reboot",
+    "action" : "shutdown -r now",
+    "text" : "Reboot"
+}
