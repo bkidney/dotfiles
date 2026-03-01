@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 # Greatly inspired by https://abesto.net/journaling-for-geeks/
 
